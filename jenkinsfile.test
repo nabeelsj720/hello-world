@@ -1,0 +1,21 @@
+pipeline{
+      agent any
+      stages{
+            stage("git chekout")
+            {
+             steps{
+                  git credentialsId: '56b6a621-4320-475a-b9de-085c79158b0f', url: 'https://github.com/nabeelsj720/hello-world.git'
+                  echo 'Hello world'                 
+                  }
+              }
+              stage("build")
+                 {
+                   steps
+                   {
+                   echo "building"
+                    withMaven(maven : 'apache-maven-3.8.6'){
+                     bat'mvn clean compile'}
+                   }
+                  }
+              }
+}
